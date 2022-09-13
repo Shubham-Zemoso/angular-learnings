@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { interval, observable, Observable, Subscription } from "rxjs";
-
+import { interval, Observable, Subscription } from "rxjs";
+import { map, filter } from "rxjs/operators";
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
@@ -30,14 +30,23 @@ export class HomeComponent implements OnInit, OnDestroy {
       }, 1000);
     });
 
-    this.firstObsSubscription = customIntervalObservable.subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
-        alert(error.message);
-      }
-    );
+    this.firstObsSubscription = customIntervalObservable
+      .pipe(
+        filter((data) => {
+          return data > 0;
+        }),
+        map((data) => {
+          return "Round: " + (+data + 1);
+        })
+      )
+      .subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          alert(error.message);
+        }
+      );
   }
 
   ngOnDestroy(): void {
