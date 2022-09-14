@@ -8,22 +8,29 @@ import { Recipe } from './recipe.model';
 export class RecipeService {
   recipeChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      'Tasty Pizza',
-      'A super-tasty Pizza -just awesome!',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdBfSaJeQTVU_BWCwq7vMRNpg-v6GiXZM6Yw&usqp=CAU',
-      [new Ingredient('Bread', 1), new Ingredient('Sauce', 1)]
-    ),
-    new Recipe(
-      'Big Fat Burger',
-      'What else you need to say?',
-      'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/mbtg1wsd3zdqu3v3rpgd',
-      [new Ingredient('Bun', 2), new Ingredient('Patty', 1)]
-    ),
-  ];
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     'Tasty Pizza',
+  //     'A super-tasty Pizza -just awesome!',
+  //     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdBfSaJeQTVU_BWCwq7vMRNpg-v6GiXZM6Yw&usqp=CAU',
+  //     [new Ingredient('Bread', 1), new Ingredient('Sauce', 1)]
+  //   ),
+  //   new Recipe(
+  //     'Big Fat Burger',
+  //     'What else you need to say?',
+  //     'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/mbtg1wsd3zdqu3v3rpgd',
+  //     [new Ingredient('Bun', 2), new Ingredient('Patty', 1)]
+  //   ),
+  // ];
+
+  private recipes: Recipe[] = [];
 
   constructor(private slService: ShoppingListService) {}
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipeChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice();
