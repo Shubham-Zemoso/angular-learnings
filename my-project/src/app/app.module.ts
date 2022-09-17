@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core.module';
 import { AuthModule } from './auth/auth.module';
+import { LoggingService } from './logging.service';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -18,7 +19,7 @@ import { AuthModule } from './auth/auth.module';
     SharedModule,
     CoreModule,
   ],
-  providers: [],
+  // providers: [LoggingService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

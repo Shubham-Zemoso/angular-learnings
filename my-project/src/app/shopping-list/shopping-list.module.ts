@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { LoggingService } from '../logging.service';
 import { SharedModule } from '../shared/shared.module';
 import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
 import { ShoppingListComponent } from './shopping-list.component';
@@ -10,11 +11,10 @@ import { ShoppingListComponent } from './shopping-list.component';
   declarations: [ShoppingListComponent, ShoppingEditComponent],
   imports: [
     FormsModule,
-    RouterModule.forChild([
-      { path: '', component: ShoppingListComponent },
-    ]),
+    RouterModule.forChild([{ path: '', component: ShoppingListComponent }]),
     SharedModule,
-    CommonModule
+    CommonModule,
   ],
+//   providers: [LoggingService],
 })
 export class ShoppingListModule {}
